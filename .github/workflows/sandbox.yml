@@ -20,56 +20,20 @@ jobs:
               {
                 "color": "good",
                 "author_name": "${{ github.actor }}",
-                "author_icon": "http://github.com/${{ github.actor }}.png?size=32",
+                "author_icon": "${{ github.event.sender.avatar_url }}",
                 "fields": [
                   {
-                    "title": "Actions URL",
-                    "value": "https://github.com/${{ github.repository }}/actions"
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
                   },
                   {
-                    "title": "Event",
-                    "value": "${{ github.event.name }}"
+                    "title": "Commit Message",
+                    "value": "${{ github.event.head_commit.message }}"
                   },
                   {
-                    "title": "EventEnv",
-                    "value": "${{ env.GITHUB_EVENT_NAME }}"
-                  },
-                  {
-                    "title": "github",
-                    "value": "${{ toJson(github) }}"
-                  },
-                  {
-                    "title": "github",
-                    "value": "${{ toJson(github) }}"
-                  },
-                  {
-                    "title": "job",
-                    "value": "${{ toJson(job) }}"
+                    "title": "Compare URL",
+                    "value": "${{ github.event.compare }}"
                   }
                 ]
               }
             ]
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
