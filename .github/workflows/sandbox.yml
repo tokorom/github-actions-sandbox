@@ -1,0 +1,35 @@
+name: sandbox
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Slack Notification
+        uses: tokorom/action-slack-incoming-webhook@v1.0.2
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          text: SandboxからのSlack送信だよー
+          attachments: |
+            [
+              {
+                "color": "good",
+                "author_name": "${{ github.actor }}",
+                "author_icon": "http://github.com/${{ github.actor }}.png?size=32",
+                "fields": [
+                  {
+                    "title": "Actions URL",
+                    "value": "https://github.com/${{ github.repository }}/actions"
+                  },
+                  {
+                    "title": "Event",
+                    "value": "${{ github.event.name }}"
+                  }
+                ]
+              }
+            ]
