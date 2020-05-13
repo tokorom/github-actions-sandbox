@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Slack Notification
-        uses: tokorom/action-slack-incoming-webhook@v1.0.2
+        uses: tokorom/action-slack-incoming-webhook@v1.1.0
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
